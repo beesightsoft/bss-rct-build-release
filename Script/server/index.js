@@ -1,5 +1,3 @@
-import { resolve } from 'url';
-
 const fs = require('fs')
 const path = require('path')
 const open = require("open")

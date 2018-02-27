@@ -32,6 +32,8 @@
   "ios-release": "./Script/src/ios-release.sh && node ./Script/server/index.js",
   "android-release": "./Script/src/android-release.sh && node ./Script/server/index.js"
 ```
+- Copy `Script/src/ios-config-example.json` to `Script/src/ios-config.json`
+- Update config ios build in `Script/src/ios-config.json`
 
 ## Screenshot
 Screenshot after build success
