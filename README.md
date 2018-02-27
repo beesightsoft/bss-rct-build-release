@@ -32,3 +32,7 @@
   "ios-release": "./Script/src/ios-release.sh && node ./Script/server/index.js",
   "android-release": "./Script/src/android-release.sh && node ./Script/server/index.js"
 ```
+
+## Screenshot
+Screenshot after build success
+![Preview](screenshot.jpg)
