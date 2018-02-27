@@ -1,0 +1,26 @@
+{
+  "name": "bee-build",
+  "version": "1.0.0",
+  "description": "Script build react native",
+  "main": "index.js",
+  "scripts": {
+    "ios-version": "./Script/src/ios-version.sh",
+    "ios-release": "./Script/src/ios-release.sh && node ./Script/server/index.js",
+    "android-release": "./Script/src/android-release.sh && node ./Script/server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beesightsoft/bss-rct-build-release.git"
+  },
+  "author": "Nhan Cao <nhancv92@gmail.com> (https://nhancv.github.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/beesightsoft/bss-rct-build-release/issues"
+  },
+  "homepage": "https://github.com/beesightsoft/bss-rct-build-release#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "open": "0.0.5",
+    "request": "^2.83.0"
+  }
+}
