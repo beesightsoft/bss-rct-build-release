@@ -35,6 +35,33 @@
 - Copy `Script/src/ios-config-example.json` to `Script/src/ios-config.json`
 - Update config ios build in `Script/src/ios-config.json`
 
+## Process build
+For iOS
+```
+  npm run ios-release
+```
+For Android
+```
+  npm run android-release
+```
+
+## Custom config file in CI (Jenkins)
+Execute shell script below to update new config before process
+```
+#!/bin/bash
+cat <<EOF > Script/src/ios-config.json
+{
+    "BUILD_ENVIRONMENT":"staging",
+    "NEED_RESET_CACHE":false,
+    "BUNDLE_ID":"com.app.apptest",
+    "DEVELOPMENT_TEAM":"xxxxxxxxxx",
+    "PROVISIONING_PROFILE_NAME":"Provision Profile Name",
+    "CODE_SIGN_IDENTITY":"iPhone Developer: Nhan Cao (xxxxxxxxxx)",
+    "BUILD_HOST":"https://iosbuild.io"
+}
+EOF
+```
+
 ## Screenshot
 Screenshot after build success
 ![Preview](screenshot.jpg)
