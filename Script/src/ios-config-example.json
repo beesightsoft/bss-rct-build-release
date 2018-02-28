@@ -5,5 +5,5 @@
 	"DEVELOPMENT_TEAM":"xxxxxxxxxx",
 	"PROVISIONING_PROFILE_NAME":"Provision Profile Name",
 	"CODE_SIGN_IDENTITY":"iPhone Developer: Nhan Cao (xxxxxxxxxx)",
-	"BUILD_HOST":"https://iosbuild.io"
+	"BUILD_HOST":"IPA_HOST"
 }

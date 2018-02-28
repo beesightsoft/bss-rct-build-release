@@ -33,7 +33,7 @@
   "android-release": "./Script/src/android-release.sh && node ./Script/server/index.js"
 ```
 - Copy `Script/src/ios-config-example.json` to `Script/src/ios-config.json`
-- Update config ios build in `Script/src/ios-config.json`
+- Update config ios build in `Script/src/ios-config.json`. Don't change BUILD_HOST if you want to host on your local. Manifest generated with ipa url like: ${BUILD_HOST}/dist/ios/IOS.ipa and apk: ${BUILD_HOST}/dist/android/ANDROID.apk
 
 ## Process build
 For iOS
@@ -57,7 +57,7 @@ cat <<EOF > Script/src/ios-config.json
     "DEVELOPMENT_TEAM":"xxxxxxxxxx",
     "PROVISIONING_PROFILE_NAME":"Provision Profile Name",
     "CODE_SIGN_IDENTITY":"iPhone Developer: Nhan Cao (xxxxxxxxxx)",
-    "BUILD_HOST":"https://iosbuild.io"
+    "BUILD_HOST":"IPA_HOST"
 }
 EOF
 ```
