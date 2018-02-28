@@ -34,8 +34,9 @@
 ```
 - Copy `Script/src/ios-config-example.json` to `Script/src/ios-config.json`
 - Update config ios build in `Script/src/ios-config.json`.
-> Use LOCAL_HOST for BUILD_HOST mean using your local ip address for distribute build file
-> Keep CODE_SIGN_IDENTITY and PROVISIONING_PROFILE_NAME empty indicated SIGNING_STYLE="automatic" otherwise SIGNING_STYLE="manual" as default
+> Use LOCAL_HOST for BUILD_HOST mean using your local ip address for distribute build file.
+>
+> Keep CODE_SIGN_IDENTITY and PROVISIONING_PROFILE_NAME empty indicated SIGNING_STYLE="automatic" otherwise SIGNING_STYLE="manual" as default.
 > 
 > Build file place at:
 > - Ipa: ${BUILD_HOST}/dist/ios/IOS.ipa
