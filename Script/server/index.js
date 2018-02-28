@@ -10,15 +10,16 @@ var port = 3000
 var address, ifaces = require('os').networkInterfaces()
 for (var dev in ifaces) {
   ifaces[dev].filter((details) => details.family === 'IPv4' && details.internal === false ? address = details.address : undefined)
+  if (address) break
 }
 var host = `http://${address}:${port}`
 
-//@nhancv: Replace IPA_HOST in manifest.plist
+//@nhancv: Replace LOCAL_HOST in manifest.plist
 new Promise(function (resolve, reject) {
   var manifestPath = path.join(buildDir, 'ios', 'manifest.plist')
   if (fs.existsSync(manifestPath)) {
     var data = fs.readFileSync(manifestPath, 'utf8')
-    var result = data.replace(/IPA_HOST/g, host)
+    var result = data.replace(/<string>LOCAL_HOST/g, `<string>${host}`)
     fs.writeFileSync(manifestPath, result, 'utf8')
 
     //@nhancv: Upload manifest.plist to heroku

@@ -33,7 +33,13 @@
   "android-release": "./Script/src/android-release.sh && node ./Script/server/index.js"
 ```
 - Copy `Script/src/ios-config-example.json` to `Script/src/ios-config.json`
-- Update config ios build in `Script/src/ios-config.json`. Don't change BUILD_HOST if you want to host on your local. Manifest generated with ipa url like: ${BUILD_HOST}/dist/ios/IOS.ipa and apk: ${BUILD_HOST}/dist/android/ANDROID.apk
+- Update config ios build in `Script/src/ios-config.json`.
+> Use LOCAL_HOST for BUILD_HOST mean using your local ip address for distribute build file
+> Keep CODE_SIGN_IDENTITY and PROVISIONING_PROFILE_NAME empty indicated SIGNING_STYLE="automatic" otherwise SIGNING_STYLE="manual" as default
+> 
+> Build file place at:
+> - Ipa: ${BUILD_HOST}/dist/ios/IOS.ipa
+> - Apk: ${BUILD_HOST}/dist/android/ANDROID.apk
 
 ## Process build
 For iOS
@@ -44,6 +50,9 @@ For Android
 ```
   npm run android-release
 ```
+## Config type
+
+
 
 ## Custom config file in CI (Jenkins)
 Execute shell script below to update new config before process
@@ -55,9 +64,9 @@ cat <<EOF > Script/src/ios-config.json
     "NEED_RESET_CACHE":false,
     "BUNDLE_ID":"com.app.apptest",
     "DEVELOPMENT_TEAM":"xxxxxxxxxx",
-    "PROVISIONING_PROFILE_NAME":"Provision Profile Name",
-    "CODE_SIGN_IDENTITY":"iPhone Developer: Nhan Cao (xxxxxxxxxx)",
-    "BUILD_HOST":"IPA_HOST"
+    "PROVISIONING_PROFILE_NAME":"",
+    "CODE_SIGN_IDENTITY":"",
+    "BUILD_HOST":"LOCAL_HOST"
 }
 EOF
 ```

@@ -16,6 +16,13 @@ PROVISIONING_PROFILE_NAME=`node -e "console.log(JSON.parse(require('fs').readFil
 CODE_SIGN_IDENTITY=`node -e "console.log(JSON.parse(require('fs').readFileSync(process.argv[1]), null, 4).CODE_SIGN_IDENTITY);"  ${CONFIG_FILE}`
 BUILD_HOST=`node -e "console.log(JSON.parse(require('fs').readFileSync(process.argv[1]), null, 4).BUILD_HOST);"  ${CONFIG_FILE}`
 
+SIGNING_STYLE="manual"
+if [ "$PROVISIONING_PROFILE_NAME" == "" ]
+then
+    CODE_SIGN_IDENTITY="iPhone Developer"
+    SIGNING_STYLE="automatic"
+fi
+
 export RCT_NO_LAUNCH_PACKAGER=true 
 
 # Reset cache
@@ -54,7 +61,7 @@ cat <<EOT >> manifest-${ENV_NAME}.plist
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
+<dict> 
     <key>compileBitcode</key>
     <true/>
     <key>method</key>
@@ -67,7 +74,7 @@ cat <<EOT >> manifest-${ENV_NAME}.plist
     <key>signingCertificate</key>
     <string>iPhone Developer</string>
     <key>signingStyle</key>
-    <string>manual</string>
+    <string>${SIGNING_STYLE}</string>
     <key>stripSwiftSymbols</key>
     <true/>
     <key>teamID</key>
