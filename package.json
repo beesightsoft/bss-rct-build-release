@@ -1,6 +1,6 @@
 {
   "name": "bee-build",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Script build react native",
   "main": "index.js",
   "scripts": {
