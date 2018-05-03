@@ -6,7 +6,8 @@
   "scripts": {
     "ios-version": "./Script/src/ios-version.sh",
     "ios-release": "./Script/src/ios-release.sh && node ./Script/server/index.js",
-    "android-release": "./Script/src/android-release.sh && node ./Script/server/index.js"
+    "android-release": "./Script/src/android-release.sh && node ./Script/server/index.js",
+    "postinstall": "node ./Script/src/android-release-gradle-fix.js && node ./Script/src/android-gradle-fix.js"
   },
   "repository": {
     "type": "git",
