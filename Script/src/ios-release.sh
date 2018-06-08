@@ -47,7 +47,6 @@ rm -rf "${ROOT_DIR}"/ios/*.plist
 echo 'Build bundle'
 echo ".env.${BUILD_ENVIRONMENT}" > /tmp/envfile
 npm run ios-version
-react-native bundle --platform ios --dev false --entry-file index.js --bundle-output ios/main.jsbundle
 
 # iOS build script
 echo 'Start build ipa'
