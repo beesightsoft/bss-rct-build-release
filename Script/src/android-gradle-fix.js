@@ -24,21 +24,28 @@ try {
   for (var i = 0; i < pathArr.length; i++) {
     var file = `${rootDir}/${pathArr[i]}/build.gradle`
     var data = fs.readFileSync(file, 'utf8')
-    var result = data
-    var index = 0
+    var array = data.toString().split("\n")
     var logs = []
-    while ((index = data.indexOf(key, index)) !== -1) {
-      var versionIndexOf = data.indexOf(':', index + key.length + 1) + 1
-      var endVersionIndexOf = data.indexOf(data[index-1], versionIndexOf + 1)
-      var moduleOrigin = data.substring(index, endVersionIndexOf)
-      var moduleNew = data.substring(index, versionIndexOf) + newVersion
-      if (moduleOrigin !== moduleNew) {
-        logs.push(`Replace: ${moduleOrigin} -> ${moduleNew}`)
-        result = result.replace(moduleOrigin, moduleNew)
-        fs.writeFileSync(file, result, 'utf8')
+
+    for(j in array) {
+      var line = array[j]
+      var index = line.indexOf(key, index)
+      if(index !== -1) {
+        var comment = line.indexOf('//')
+        if(comment === -1 || comment > index) {
+          var versionIndexOf = line.indexOf(':', index + key.length + 1) + 1
+          var endVersionIndexOf = line.indexOf(line[index-1], versionIndexOf + 1)
+          var moduleOrigin = line.substring(index, endVersionIndexOf)
+          var moduleNew = line.substring(index, versionIndexOf) + newVersion
+          if (moduleOrigin !== moduleNew) {
+            logs.push(`Replace: ${moduleOrigin} -> ${moduleNew}`)
+            data = data.replace(moduleOrigin, moduleNew)
+            fs.writeFileSync(file, data, 'utf8')
+          }
+        }
       }
-      index++
     }
+    
     if (logs.length > 0) {
       console.log(`Fix path: ${pathArr[i]}`)
       for (var j = 0; j < logs.length; j++) {
