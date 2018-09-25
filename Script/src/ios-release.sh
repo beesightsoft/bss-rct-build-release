@@ -16,10 +16,14 @@ PROVISIONING_PROFILE_NAME=`node -e "console.log(JSON.parse(require('fs').readFil
 CODE_SIGN_IDENTITY=`node -e "console.log(JSON.parse(require('fs').readFileSync(process.argv[1]), null, 4).CODE_SIGN_IDENTITY);"  ${CONFIG_FILE}`
 BUILD_HOST=`node -e "console.log(JSON.parse(require('fs').readFileSync(process.argv[1]), null, 4).BUILD_HOST);"  ${CONFIG_FILE}`
 
+PACKAGE_TYPE="development"
 SIGNING_STYLE="manual"
+SIGNING_CERTIFICATE="iPhone Developer"
+
 if [ "$PROVISIONING_PROFILE_NAME" == "" ]
 then
-    CODE_SIGN_IDENTITY="iPhone Developer"
+    SIGNING_CERTIFICATE="iPhone Developer"
+    CODE_SIGN_IDENTITY="${SIGNING_CERTIFICATE}"
     SIGNING_STYLE="automatic"
 fi
 
@@ -54,7 +58,7 @@ echo 'Start build ipa'
 cd ios
 pod install
 
-env DEVELOPER_DIR="/Applications/Xcode.app" /usr/bin/xcodebuild -workspace ${PROJECT_NAME}.xcworkspace/ -scheme ${PROJECT_NAME} -configuration Release CODE_SIGN_IDENTITY="${CODE_SIGN_IDENTITY}" archive -archivePath "${ROOT_DIR}/ios/build/${ENV_NAME}/${ENV_NAME}.xcarchive" -verbose
+env DEVELOPER_DIR="/Applications/Xcode.app" /usr/bin/xcodebuild -workspace "${PROJECT_NAME}".xcworkspace/ -scheme "${PROJECT_NAME}" -configuration Release CODE_SIGN_IDENTITY="${CODE_SIGN_IDENTITY}" CODE_SIGN_STYLE="$(tr '[:lower:]' '[:upper:]' <<< ${SIGNING_STYLE:0:1})${SIGNING_STYLE:1}" DEVELOPMENT_TEAM="${DEVELOPMENT_TEAM}" PROVISIONING_PROFILE_SPECIFIER="${PROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${BUNDLE_ID}" clean archive -archivePath "${ROOT_DIR}/ios/build/${ENV_NAME}/${ENV_NAME}.xcarchive" -verbose
 
 cat <<EOT >> manifest-${ENV_NAME}.plist
 <?xml version="1.0" encoding="UTF-8"?>
@@ -62,20 +66,20 @@ cat <<EOT >> manifest-${ENV_NAME}.plist
 <plist version="1.0">
 <dict> 
     <key>compileBitcode</key>
-    <true/>
+    <false/>
     <key>method</key>
-    <string>development</string>
+    <string>${PACKAGE_TYPE}</string>
     <key>provisioningProfiles</key>
     <dict>
         <key>${BUNDLE_ID}</key>
         <string>${PROVISIONING_PROFILE_NAME}</string>
     </dict>
     <key>signingCertificate</key>
-    <string>iPhone Developer</string>
+    <string>${SIGNING_CERTIFICATE}</string>
     <key>signingStyle</key>
     <string>${SIGNING_STYLE}</string>
     <key>stripSwiftSymbols</key>
-    <true/>
+    <false/>
     <key>teamID</key>
     <string>${DEVELOPMENT_TEAM}</string>
     <key>thinning</key>
