@@ -13,7 +13,7 @@ try {
             throw "Already fixed."
         }
 
-        var result = data.replace(/                \/\/ Set up inputs and outputs so gradle can cache the result/g, dataFix);
+        var result = data.replace(/\/\/ Set up inputs and outputs so gradle can cache the result/g, dataFix);
         fs.writeFileSync(file, result, 'utf8')
         console.log('Done')
     } catch (error) {

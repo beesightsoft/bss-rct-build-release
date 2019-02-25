@@ -23,7 +23,7 @@ fi
 # Install dependencies
 echo 'Install dependencies'
 npm config set prefix ${ROOT_DIR}
-npm install
+npm install --force --unsafe-perm
 
 # Cleanup Android
 echo 'Check android release gradle: '
@@ -34,12 +34,12 @@ rm -rf ${ROOT_DIR}/android/app/build
 
 # React native build bundle
 echo 'Build bundle'
-react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.bundle --assets-dest android/app/src/main/res 
+react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
 export ENVFILE=.env.${BUILD_ENVIRONMENT}
 
 # Android build script
 echo 'Start build apk'
 
-cd ${ROOT_DIR}/android && ./gradlew assembleRelease
+cd ${ROOT_DIR}/android && ./gradlew clean assembleRelease
 
-mv ${ROOT_DIR}/android/app/build/outputs/apk/*.apk ${ROOT_DIR}/Script/server/dist/android/ANDROID.apk
+mv ${ROOT_DIR}/android/app/build/outputs/apk/release/*.apk ${ROOT_DIR}/Script/server/dist/android/ANDROID.apk

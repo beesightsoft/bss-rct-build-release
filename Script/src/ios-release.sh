@@ -58,7 +58,7 @@ echo 'Start build ipa'
 cd ios
 pod install
 
-env DEVELOPER_DIR="/Applications/Xcode.app" /usr/bin/xcodebuild -workspace "${PROJECT_NAME}".xcworkspace/ -scheme "${PROJECT_NAME}" -configuration Release CODE_SIGN_IDENTITY="${CODE_SIGN_IDENTITY}" CODE_SIGN_STYLE="$(tr '[:lower:]' '[:upper:]' <<< ${SIGNING_STYLE:0:1})${SIGNING_STYLE:1}" DEVELOPMENT_TEAM="${DEVELOPMENT_TEAM}" PROVISIONING_PROFILE_SPECIFIER="${PROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${BUNDLE_ID}" clean archive -archivePath "${ROOT_DIR}/ios/build/${ENV_NAME}/${ENV_NAME}.xcarchive" -verbose
+env DEVELOPER_DIR="/Applications/Xcode.app" /usr/bin/xcodebuild -UseModernBuildSystem=NO -workspace "${PROJECT_NAME}".xcworkspace/ -scheme "${PROJECT_NAME}" -configuration Release CODE_SIGN_IDENTITY="${CODE_SIGN_IDENTITY}" CODE_SIGN_STYLE="$(tr '[:lower:]' '[:upper:]' <<< ${SIGNING_STYLE:0:1})${SIGNING_STYLE:1}" DEVELOPMENT_TEAM="${DEVELOPMENT_TEAM}" PROVISIONING_PROFILE_SPECIFIER="${PROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${BUNDLE_ID}" clean archive -archivePath "${ROOT_DIR}/ios/build/${ENV_NAME}/${ENV_NAME}.xcarchive" -verbose
 
 cat <<EOT >> manifest-${ENV_NAME}.plist
 <?xml version="1.0" encoding="UTF-8"?>
