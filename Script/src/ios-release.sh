@@ -34,7 +34,7 @@ NEED_RESET_CACHE=`node -e "console.log(JSON.parse(require('fs').readFileSync(pro
 if [ "$NEED_RESET_CACHE" == true ]
 then
     echo 'Reset cache'
-    rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro-* && watchman watch-del-all && rm -rf ios/build && rm -rf node_modules/ && npm cache clean --force
+    rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro-* && rm -rf $TMPDIR/haste-* && watchman watch-del-all && npm cache clean --force && npm cache verify && rm -rf ios/build && rm -rf node_modules
 fi
 
 # Install dependencies

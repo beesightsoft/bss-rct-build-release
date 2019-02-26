@@ -1,9 +1,9 @@
 {
 	"BUILD_ENVIRONMENT":"staging",
-	"NEED_RESET_CACHE":false,
+	"NEED_RESET_CACHE":true,
 	"BUNDLE_ID":"com.app.apptest",
-	"DEVELOPMENT_TEAM":"xxxxxxxxxx",
-	"PROVISIONING_PROFILE_NAME":"",
-	"CODE_SIGN_IDENTITY":"",
+	"DEVELOPMENT_TEAM":"6VDDJILUUQ",
+	"PROVISIONING_PROFILE_NAME":"iOS Development Wildcard",
+	"CODE_SIGN_IDENTITY":"iPhone Developer: Nhan Cao (1A2IVIKU2Z)",
 	"BUILD_HOST":"LOCAL_HOST"
 }
